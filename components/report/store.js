@@ -1,5 +1,11 @@
 const db = require('mongoose');
 const Model = require('./model');
+const { config: { dbUser, dbPassword, dbHost, port, dbName} } = require('../../config');
+
+db.Promise = global.Promise;
+db.connect(`mongodb://${dbUser}:${dbPassword}@${dbHost}:${port}/${dbName}`,
+ {useNewUrlParser: true}
+ );
 
 db.Promise = global.Promise;
 
