@@ -8,5 +8,5 @@ const mySchema = new Schema({
     current_report: String,
 });
 
-const model = mongoose.model('Report', mySchema);
+const model = mongoose.model('Agent', mySchema);
 module.exports = model;
