@@ -2,9 +2,6 @@ const db = require('mongoose');
 const Model = require('./model');
 
 db.Promise = global.Promise;
-db.connect('mongodb://user',{
-    useNewUrlParser: true
-})
 
 const addReport= (report) => {
     const myReport = new Model(report);
@@ -26,20 +23,20 @@ const removeReport= (id) => {
     });
 }
 
-const updateText = async (id, report) => {
+const reportSolved = async (id) => {
     const foundReport = await Model.findOne({
         _id: id
     });
 
-    foundReport.report = report;
+    foundReport.solved = true;
 
-    const newReport = await foundReport.save();
-    return newReport;
+    const statusReport = await foundReport.save();
+    return statusReport;
 }
 
 module.exports = {
     add: addReport,
     list: getReports,
-    updateText: updateText,
+    reportSolved,
     remove: removeReport,
 }
