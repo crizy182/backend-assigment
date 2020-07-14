@@ -1,0 +1,24 @@
+{
+  "name": "TestDocRed",
+  "version": "1.0.0",
+  "description": "Code Challenge para candidatos Backend para DocRed.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crizy182/backend-assigment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crizy182/backend-assigment/issues"
+  },
+  "homepage": "https://github.com/crizy182/backend-assigment#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
