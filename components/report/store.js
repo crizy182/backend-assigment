@@ -1,5 +1,13 @@
 const db = require('mongoose');
 const Model = require('./model');
+const { config: { dbUser, dbPassword, dbHost, dbName} } = require('../../config');
+
+const URI = `mongodb://${dbUser}:${dbPassword}@${dbHost}:27017/${dbName}`
+
+db.Promise = global.Promise;
+db.connect(URI,
+ {useNewUrlParser: true, useUnifiedTopology: true}
+ );
 
 db.Promise = global.Promise;
 
