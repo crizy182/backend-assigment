@@ -16,18 +16,20 @@ const agentsList = () => {
 
     const res = Agent.find()
 
+    return res
+}
+
+const reportsList = async () => {
+
+    const list = await Model.find()
+    console.log(list)
+    return list;
     
 }
 
-const reportsList = () => {
-
-    const res = Model.find()
-    console.log(res);
-    
-}
-
-const addReport = (report) => {
-    const myReport = new Model(report);
+const addReport = (fullReport) => {
+    console.log(fullReport)
+    const myReport = new Model(fullReport);
     myReport.save();
 }
 

@@ -1,6 +1,6 @@
 const store = require('./store')
 
-const  addReport = ( reportID) => {
+const  addReport = ( reportID, reportDescription) => {
   
   return new Promise((resolve, reject) => {
       if (!reportID) {
@@ -11,6 +11,7 @@ const  addReport = ( reportID) => {
 
       const fullReport = {
           reportID,
+          reportDescription
       };
   
       store.add(fullReport);
@@ -20,6 +21,7 @@ const  addReport = ( reportID) => {
 }
 
 const  getReports = () => {
+  
   return new Promise((resolve, reject) => {
       resolve(store.reportsList());
   })

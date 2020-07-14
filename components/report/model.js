@@ -3,16 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
-    id: String,
+    report: {
+        type: String
+    },
     solved: {
         type: Boolean,
         default: false
     },
     agent: String,
-    report: {
-        type: String,
-        required: true,
-    },
 });
 
 const model = mongoose.model('Report', mySchema);

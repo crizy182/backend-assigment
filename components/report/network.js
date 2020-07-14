@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const filterReports = req.query.report || null;
-    console.log(req.query);
+    
     
     controller.getReports(filterReports)
         .then((reportList) => {
