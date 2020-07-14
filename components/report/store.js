@@ -1,4 +1,10 @@
+const db = require('mongoose');
 const Model = require('./model');
+
+db.Promise = global.Promise;
+db.connect('mongodb://user',{
+    useNewUrlParser: true
+})
 
 const addReport= (report) => {
     const myReport = new Model(report);

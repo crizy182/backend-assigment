@@ -3,14 +3,13 @@ const store = require('./store')
 const  addReport = (agent, report) => {
   
   return new Promise((resolve, reject) => {
-      if (!agent || !report) {
-          console.error('[reportController] There is no Agent or Report');
+      if (!report) {
+          console.error('[reportController] There is no Report');
           reject('Data absolutely invalid');
           return false;
       }
 
       const fullReport = {
-          agent: agent,
           report: report,
       };
   
