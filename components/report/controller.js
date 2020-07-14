@@ -1,3 +1,5 @@
+const store = require('./store')
+
 const  addReport = (agent, report) => {
   
   return new Promise((resolve, reject) => {
