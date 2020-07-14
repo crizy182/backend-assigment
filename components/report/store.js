@@ -2,7 +2,10 @@ const db = require('mongoose');
 const Model = require('./model');
 const { config: { dbUser, dbPassword, dbHost, dbName} } = require('../../config');
 
-const URI = `mongodb://${dbUser}:${dbPassword}@${dbHost}:27017/${dbName}`
+const URI = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}`
+
+console.log(URI);
+
 
 db.Promise = global.Promise;
 db.connect(URI,
