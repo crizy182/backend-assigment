@@ -19,9 +19,9 @@ const  addReport = ( reportID) => {
   });
 }
 
-const  getReports = (filterAgent) => {
+const  getReports = () => {
   return new Promise((resolve, reject) => {
-      resolve(store.list(filterAgent));
+      resolve(store.agentsList());
   })
 }
 
