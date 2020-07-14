@@ -1,19 +1,19 @@
 const store = require('./store')
 
-const  addReport = (agent, report) => {
+const  addReport = ( reportID) => {
   
   return new Promise((resolve, reject) => {
-      if (!report) {
+      if (!reportID) {
           console.error('[reportController] There is no Report');
           reject('Data absolutely invalid');
           return false;
       }
 
       const fullReport = {
-          report: report,
+          reportID,
       };
   
-      // store.add(fullReport);
+      store.add(fullReport);
 
       resolve(fullReport);
   });
@@ -21,7 +21,7 @@ const  addReport = (agent, report) => {
 
 const  getReports = (filterAgent) => {
   return new Promise((resolve, reject) => {
-      // resolve(store.list(filterAgent));
+      resolve(store.list(filterAgent));
   })
 }
 

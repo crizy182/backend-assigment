@@ -1,11 +1,9 @@
 const db = require('mongoose');
 const Model = require('./model');
 const Agent = require('../agent/model')
-const { config: { dbUser, dbPassword, dbHost, dbName} } = require('../../config');
+const { dbUser, dbPassword, dbHost, dbName } = require('../../config');
 
 const URI = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}`
-
-console.log(URI);
 
 db.Promise = global.Promise;
 db.connect(URI,
@@ -24,7 +22,9 @@ const addReport = (report) => {
 }
 
 const getAFreeAgent = async (reportID) => {
-    const freeAgent = await Agent.updateOne({current_report: null}, {$set: {current_report:reportID}} );
+    const filter = {current_report: null}
+    const update =  {current_report:reportID}
+    const freeAgent = await Agent.updateOne(filter, {$set: update} );
 
     return freeAgent
 }
