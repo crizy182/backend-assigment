@@ -1,11 +1,11 @@
 const db = require('mongoose');
 const Model = require('./model');
+const Agent = require('../agent/model')
 const { config: { dbUser, dbPassword, dbHost, dbName} } = require('../../config');
 
 const URI = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}`
 
 console.log(URI);
-
 
 db.Promise = global.Promise;
 db.connect(URI,
@@ -14,40 +14,33 @@ db.connect(URI,
 
 db.Promise = global.Promise;
 
-const addReport= (report) => {
+const agentsList = () => Agent.find();
+
+const reportsList = () => Model.find();
+
+const addReport = (report) => {
     const myReport = new Model(report);
     myReport.save();
 }
 
-const getReports = async (filterAgent) => {
-    let filter = {};
-    if (filterAgent !== null) {
-        filter = { agent: filterAgent };
-    }
-    const reports = await Model.find(filter);
-    return reports;
+const getAFreeAgent = async (reportID) => {
+    const freeAgent = await Agent.updateOne({current_report: null}, {$set: {current_report:reportID}} );
+
+    return freeAgent
 }
 
-const removeReport= (id) => {
-    return Model.deleteOne({
-        _id: id
-    });
-}
 
-const reportSolved = async (id) => {
-    const foundReport = await Model.findOne({
-        _id: id
-    });
+const reportSolved = async (reportID) => {
+    const report = await Model.updateOne({id: reportID}, {$set: {solved: true}})
+    const agentAssigned = await Agent.updateOne({current_report: reportID}, {$set: {current_report:null}})
 
-    foundReport.solved = true;
-
-    const statusReport = await foundReport.save();
-    return statusReport;
+    return { report, agentAssigned}
 }
 
 module.exports = {
+    agentsList,
+    reportsList,
     add: addReport,
-    list: getReports,
+    getAFreeAgent,
     reportSolved,
-    remove: removeReport,
 }
