@@ -4,10 +4,23 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const filterReports = req.query.agent || null;
+    const filterReports = req.query.report || null;
+    console.log(req.query);
+    
     controller.getReports(filterReports)
         .then((reportList) => {
             response.success(req, res, reportList, 200);
+        })
+        .catch(e => {
+            response.error(req, res, 'Unexpected Error', 500, e);
+        })
+});
+
+router.get('/agents', (req, res) => {
+    const filterAgent = req.query.agent || null;
+    controller.getAgent(filterAgent)
+        .then((agentList) => {
+            response.success(req, res, agentList, 200);
         })
         .catch(e => {
             response.error(req, res, 'Unexpected Error', 500, e);
@@ -19,9 +32,7 @@ router.post('/', (req, res) => {
         .then((fullReport) => {
             response.success(req, res, fullReport, 201);    
         })
-        .catch(e => {
-            console.log(e);
-            
+        .catch(e => {           
             response.error(req, res, 'Informacion invalida', 400, 'Error en el controlaor');
         });
 });

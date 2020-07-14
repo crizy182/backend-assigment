@@ -21,7 +21,7 @@ const  addReport = ( reportID) => {
 
 const  getReports = () => {
   return new Promise((resolve, reject) => {
-      resolve(store.agentsList());
+      resolve(store.reportsList());
   })
 }
 

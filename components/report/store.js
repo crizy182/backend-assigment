@@ -12,9 +12,19 @@ db.connect(URI,
 
 db.Promise = global.Promise;
 
-const agentsList = () => Agent.find();
+const agentsList = () => {
 
-const reportsList = () => Model.find();
+    const res = Agent.find()
+
+    
+}
+
+const reportsList = () => {
+
+    const res = Model.find()
+    console.log(res);
+    
+}
 
 const addReport = (report) => {
     const myReport = new Model(report);
