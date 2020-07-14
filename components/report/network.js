@@ -4,7 +4,7 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const filterReports = req.query.user || null;
+    const filterReports = req.query.agent || null;
     controller.getReports(filterReports)
         .then((reportList) => {
             response.success(req, res, reportList, 200);
@@ -15,17 +15,19 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => { 
-    controller.addReport(req.body.user, req.body.issue)
+    controller.addReport(req.body.agent, req.body.report)
         .then((fullReport) => {
             response.success(req, res, fullReport, 201);    
         })
         .catch(e => {
+            console.log(e);
+            
             response.error(req, res, 'Informacion invalida', 400, 'Error en el controlaor');
         });
 });
 
 router.patch('/:id', (req, res) => {
-    controller.updateReport(req.params.id, req.body.issue)
+    controller.updateReport(req.params.id, req.body.report)
         .then((data) => {
             response.success(req, res, data, 200);
         })
